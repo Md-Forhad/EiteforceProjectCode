@@ -1,0 +1,20 @@
+select ea_emp_id, count(ea_id), EMP_TEMP_RECR_CODE||'_'||(select AD_DOC_CODE from  ATTACH_DETAILS where AD_ID = EA_DETAILS)||EA_FILE_TYPE  as filee,--ea_emp_id, EA_FILE_TYPE, count(ea_id) EMP_TEMP_RECR_CODE
+system.SAA_FileExists('ELITE_EMP_FILE_MANAGER', EMP_TEMP_RECR_CODE||'_'||(select AD_DOC_CODE from  ATTACH_DETAILS where AD_ID = EA_DETAILS)||EA_FILE_TYPE    ) as checkk
+from EMP_ATTACH, emp_mst
+where ea_emp_id = emp_id
+group by ea_emp_id, EMP_TEMP_RECR_CODE, EA_FILE_TYPE, EA_DETAILS--, EA_FILE_TYPE
+having count(ea_id) > 1
+and system.SAA_FileExists('ELITE_EMP_FILE_MANAGER', EMP_TEMP_RECR_CODE||'_'||(select AD_DOC_CODE from  ATTACH_DETAILS where AD_ID = EA_DETAILS)||EA_FILE_TYPE    ) = 0
+and EA_DETAILS <> 9
+order by ea_emp_id desc
+
+select EMP_ATTACH.*,EMP_TEMP_RECR_CODE,emp_code
+from EMP_ATTACH, emp_mst
+where ea_emp_id = emp_id
+and ea_emp_id = 2846
+order by ea_emp_id desc
+
+update EMP_ATTACH
+set EA_FILE_TYPE = '.jpg'
+where EA_EMP_ID = 2846
+and EA_DETAILS <> 1; --1= nid, 9=idcard
