@@ -1,5 +1,5 @@
 
--- monthly attendance wise working hour register process
+-- curret month attendance wise working hour register process based on deployment order
 begin
     order_service_attendance(95,sysdate); -- sts = 95 order
 end;
