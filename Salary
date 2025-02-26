@@ -1,1 +1,5 @@
 
+-- salary process
+begin
+    service_salary_process (sysdate,'admin',2263,95); -- sts(2263) = order(95)
+end;
