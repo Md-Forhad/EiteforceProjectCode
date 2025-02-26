@@ -1,1 +1,5 @@
 
+-- monthly attendance wise working hour register process
+begin
+    order_service_attendance(95,sysdate); -- sts = 95 order
+end;
