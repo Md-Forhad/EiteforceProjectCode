@@ -1,1 +1,20 @@
-
+------------------------------------- check duplicate employee on same order and service and same working type(general,ot) -------------------------------------
+select ORA_ORDER_CDOM_ID, CDOM_ORDER_NO,
+       ORA_DEPLOYLOC_CDL_ID,
+       --ORA_EFFECTIVE_DATE,
+       ORA_RESOURCE_EMP_ID,
+       ORA_SERVICE_CDOS_ID,
+       ORA_SERVICE_ID,
+       ORA_SERVICE_SHIFTWORK_TYPE,
+       count(ORA_RESOURCE_EMP_ID)
+from ORDER_RESOURCE_ASSIGNMENT, CLIENT_DEPLOY_ORDER_MST
+where ORA_ORDER_CDOM_ID = CDOM_ID
+group by ORA_ORDER_CDOM_ID,CDOM_ORDER_NO,
+       ORA_DEPLOYLOC_CDL_ID,
+       --ORA_EFFECTIVE_DATE,
+       ORA_RESOURCE_EMP_ID,
+       ORA_SERVICE_CDOS_ID,
+       ORA_SERVICE_ID,
+       ORA_SERVICE_SHIFTWORK_TYPE
+having count(ORA_RESOURCE_EMP_ID) > 1
+order by ORA_ORDER_CDOM_ID desc
