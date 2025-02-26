@@ -1,11 +1,12 @@
----------------------------check file extension and update
+---------------------------start check file extension and update
 select emp_attach.*
 from EMP_ATTACH, emp_mst
 where ea_emp_id = emp_id
 and EA_DETAILS <> 9 -- ID CARD
-and ea_emp_id = 10513
-
+and ea_emp_id = 10513;
 
 update emp_attach
 set EA_FILE_TYPE = '.pdf'
 where ea_id = 6734;
+
+---------------------------end check file extension and update
