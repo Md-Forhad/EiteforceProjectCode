@@ -18,3 +18,9 @@ group by ORA_ORDER_CDOM_ID,CDOM_ORDER_NO,
        ORA_SERVICE_SHIFTWORK_TYPE
 having count(ORA_RESOURCE_EMP_ID) > 1
 order by ORA_ORDER_CDOM_ID desc
+
+------------------------------------USED Job list in Agreement Service
+select distinct JSM_NAME, JSM_CODE, JSD_ID
+from client_agreement_service, job_setup_mst, job_setup_dtl
+where CAS_SERVICE_JSD_ID = JSD_ID
+and jsd_jsm_id = jsm_id;
